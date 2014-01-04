@@ -5,10 +5,11 @@ module GeometryParser
   end
 
   class Polygon
-    attr_reader :segments, :points
+    attr_reader :segments, :points, :id
+    attr_accessor :relationships
 
     def initialize(data)
-      @name = data['id']
+      @id = data['id']
       @points = data['point'].map { |p| Point.new(p) }
       @valid = false
       @relationships = {}
