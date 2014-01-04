@@ -8,14 +8,22 @@ module GeometryParser
     end
 
     def intersects?(segment)
-      o1 = Point.orientation(@point1, @point2, segment.point1)
-      o2 = Point.orientation(@point1, @point2, segment.point2)
-      o3 = Point.orientation(segment.point1, segment.point2, @point1)
-      o4 = Point.orientation(segment.point1, segment.point2, @point2)
+      o0 = Point.orientation(@point1, @point2, segment.point1)
+      o1 = Point.orientation(@point1, @point2, segment.point2)
+      o2 = Point.orientation(segment.point1, segment.point2, @point1)
+      o3 = Point.orientation(segment.point1, segment.point2, @point2)
+      return true if o0 != o1 && o2 != o3
 
-      return true  if o1 != o2 && o3 != o4
+      [
+        [@point1, segment.point1, @point2],
+        [@point1, segment.point2, @point2],
+        [segment.point1, @point1, segment.point2],
+        [segment.point1, @point2, segment.point2]
+      ].each_with_index do |points, i|
+        return true if eval("o#{i}") == 0 && Point.on_segment?(*points)
+      end
 
-      
+      false
     end
   end
 end

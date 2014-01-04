@@ -14,6 +14,10 @@ module Factories
   def points(arr)
     arr.map { |p| point(*p) }
   end
+
+  def segment(x1, y1, x2, y2)
+    GeometryParser::Segment.new(point(x1, y1), point(x2, y2))
+  end
 end
 
 module GeometryParser
