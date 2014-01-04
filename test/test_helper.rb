@@ -35,13 +35,13 @@ module Factories
     GeometryParser::Segment.new(point(x1, y1), point(x2, y2))
   end
 
-  def polygon(points = [[0, 0], [1, 1], [2, 0]])
+  def polygon(points: [[0, 0], [1, 1], [2, 0]], type: :polygon)
     formatted_points = []
     points.each do |point|
       formatted_points << { 'x' => point[0], 'y' => point[1] }
     end
 
-    GeometryParser::Polygon.new('id' => "shape#{get_sequence(:polygon)}", 'point' => formatted_points)
+    "GeometryParser::#{type.to_s.camelize}".constantize.new('id' => "shape#{get_sequence(:polygon)}", 'point' => formatted_points)
   end
 end
 
@@ -49,5 +49,9 @@ Factories.get_sequence(:dog)
 
 module GeometryParser
   class Test < MiniTest::Unit::TestCase
+    def teardown
+      GeometryParser.polygons = []
+      super
+    end
   end
 end

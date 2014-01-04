@@ -1,4 +1,9 @@
 module GeometryParser
+  class << self
+    attr_accessor :polygons
+    GeometryParser.polygons = []
+  end
+
   class Polygon
     attr_reader :segments
 
@@ -6,6 +11,7 @@ module GeometryParser
       @name = data['id']
       @points = data['point'].map { |p| Point.new(p) }
       @valid = false
+      @relationships = {}
 
       @segments = []
       (0..@points.size - 1).each do |i|
@@ -51,8 +57,10 @@ module GeometryParser
       true
     end
 
-    def valid?
-      @valid
+    private
+
+    def add_to_collection
+      GeometryParser.polygons << self if @valid
     end
   end
 end

@@ -1,3 +1,4 @@
+require 'active_support/all'
 require './lib/geometry_parser/point'
 require './lib/geometry_parser/segment'
 require './lib/geometry_parser/convex_hull'
