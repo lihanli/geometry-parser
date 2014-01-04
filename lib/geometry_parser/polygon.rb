@@ -23,6 +23,22 @@ module GeometryParser
       ConvexHull.convert(@points).size == @points.size
     end
 
+    def point_inside?(test_point)
+      found = false
+      prev_i = @points.size - 1
+
+      (0..@points.size - 1).each do |i|
+        if (@points[i].y > test_point.y != @points[prev_i].y > test_point.y) &&
+           (test_point.x < (@points[prev_i].x - @points[i].x) * (test_point.y - @points[i].y) / (@points[prev_i].y - @points[i].y) + @points[i].x)
+          found = !found
+        end
+
+        prev_i = i
+      end
+
+      found
+    end
+
     def simple?
       @segments.each_with_index do |segment, i|
         break if i == @segments.size - 1
