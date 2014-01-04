@@ -8,6 +8,19 @@ module GeometryParser
     attr_reader :segments, :points, :id
     attr_accessor :relationships
 
+    def self.find_all_relationships
+      polygons = GeometryParser.polygons
+      polygons.each do |polygon|
+        found = polygon.relationships.keys
+        needed = polygons.reject { |p| found.include?(p.id) || p == polygon }
+
+        needed.each do |p|
+          relationship = polygon.find_relationship(p)
+          p.find_relationship(polygon) if relationship == :separate
+        end
+      end
+    end
+
     def initialize(data)
       @id = data['id']
       @points = data['point'].map { |p| Point.new(p) }
@@ -56,6 +69,10 @@ module GeometryParser
       end
 
       true
+    end
+
+    def valid?
+      @valid
     end
 
     private

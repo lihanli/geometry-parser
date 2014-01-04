@@ -45,8 +45,6 @@ module Factories
   end
 end
 
-Factories.get_sequence(:dog)
-
 module GeometryParser
   class Test < MiniTest::Unit::TestCase
     def teardown
