@@ -10,6 +10,17 @@ module GeometryParser
       area > 0 ? 1 : -1
     end
 
+    # check if point2 lies on segment point1, point3
+    def self.on_segment?(point1, point2, point3)
+      x_values = [point1.x, point3.x]
+      y_values = [point1.y, point3.y]
+
+      (point2.x <= x_values.max &&
+       point2.x >= x_values.min &&
+       point2.y <= y_values.max &&
+       point2.y >= y_values.min)
+    end
+
     def initialize(data)
       @x = data['x']
       @y = data['y']
