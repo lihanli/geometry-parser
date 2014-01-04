@@ -16,7 +16,7 @@ module GeometryParser
         next_idx = (idx + 1) % size
 
         (0..size - 1).each do |i|
-          next_idx = i if Point.orientation(points[idx], points[i], points[next_idx]) == 2
+          next_idx = i if Point.orientation(points[idx], points[i], points[next_idx]) == -1
         end
 
         valid_indices[idx] = next_idx

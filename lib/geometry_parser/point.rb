@@ -14,5 +14,9 @@ module GeometryParser
       @x = data['x']
       @y = data['y']
     end
+
+    def to_s
+      "(#{@x}, #{@y})"
+    end
   end
 end

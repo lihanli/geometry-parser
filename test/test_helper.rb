@@ -10,6 +10,10 @@ module Factories
   def point(x = 0, y = 0)
     GeometryParser::Point.new('x' => x, 'y' => y)
   end
+
+  def points(arr)
+    arr.map { |p| point(*p) }
+  end
 end
 
 module GeometryParser
