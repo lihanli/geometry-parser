@@ -35,7 +35,7 @@ module Factories
     GeometryParser::Segment.new(point(x1, y1), point(x2, y2))
   end
 
-  def polygon(points)
+  def polygon(points = [[0, 0], [1, 1], [2, 0]])
     formatted_points = []
     points.each do |point|
       formatted_points << { 'x' => point[0], 'y' => point[1] }

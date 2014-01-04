@@ -17,6 +17,12 @@ module GeometryParser
       end
     end
 
+    def convex?
+      return false unless simple?
+
+      ConvexHull.convert(@points).size == @points.size
+    end
+
     def simple?
       @segments.each_with_index do |segment, i|
         break if i == @segments.size - 1
