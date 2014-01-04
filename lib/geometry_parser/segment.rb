@@ -25,5 +25,9 @@ module GeometryParser
 
       false
     end
+
+    def to_s
+      "#{@point1.to_s}-#{@point2.to_s}"
+    end
   end
 end

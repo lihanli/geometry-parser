@@ -5,7 +5,23 @@ require './lib/geometry_parser'
 Turn.config.format = :pretty
 
 module Factories
+  class << self
+    attr_accessor :sequences
+    Factories.sequences = {}
+  end
+
   module_function
+
+  def get_sequence(type)
+    if sequences[type]
+      val = sequences[type]
+      sequences[type] += 1
+
+      val
+    else
+      sequences[type] = 0
+    end
+  end
 
   def point(x = 0, y = 0)
     GeometryParser::Point.new('x' => x, 'y' => y)
@@ -18,7 +34,18 @@ module Factories
   def segment(x1, y1, x2, y2)
     GeometryParser::Segment.new(point(x1, y1), point(x2, y2))
   end
+
+  def polygon(points)
+    formatted_points = []
+    points.each do |point|
+      formatted_points << { 'x' => point[0], 'y' => point[1] }
+    end
+
+    GeometryParser::Polygon.new('id' => "shape#{get_sequence(:polygon)}", 'point' => formatted_points)
+  end
 end
+
+Factories.get_sequence(:dog)
 
 module GeometryParser
   class Test < MiniTest::Unit::TestCase
