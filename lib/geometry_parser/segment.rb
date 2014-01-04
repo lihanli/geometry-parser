@@ -1,6 +1,6 @@
 module GeometryParser
   class Segment
-    attr_accessor :point1, :point2
+    attr_reader :point1, :point2
 
     def initialize(point1, point2)
       @point1 = point1
