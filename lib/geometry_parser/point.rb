@@ -1,6 +1,6 @@
 module GeometryParser
   class Point
-    attr_accessor :x, :y
+    attr_reader :x, :y
 
     # 0 => colinear, 1 => clockwise, -1 => counterclockwise
     def self.orientation(point1, point2, point3)
