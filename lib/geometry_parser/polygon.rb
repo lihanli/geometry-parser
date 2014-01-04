@@ -17,6 +17,18 @@ module GeometryParser
       end
     end
 
+    def simple?
+      @segments.each_with_index do |segment, i|
+        break if i == @segments.size - 1
+
+        (i + 1..@segments.size - 1).each do |other_segment_idx|
+          return false if segment.intersects?(@segments[other_segment_idx])
+        end
+      end
+
+      true
+    end
+
     def valid?
       @valid
     end

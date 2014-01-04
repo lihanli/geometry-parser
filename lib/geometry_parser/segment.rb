@@ -8,6 +8,9 @@ module GeometryParser
     end
 
     def intersects?(segment)
+      # ignore endpoint to endpoint intersections
+      return false if @point1 == segment.point2 || @point2 == segment.point1
+
       o0 = Point.orientation(@point1, @point2, segment.point1)
       o1 = Point.orientation(@point1, @point2, segment.point2)
       o2 = Point.orientation(segment.point1, segment.point2, @point1)

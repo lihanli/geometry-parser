@@ -16,5 +16,6 @@ class SegmentTest < GeometryParser::Test
     assert_equal(false, Factories.segment(1, 1, 10, 1).intersects?(Factories.segment(1, 2, 10, 2)))
     assert_equal(true, Factories.segment(10, 0, 0, 10).intersects?(Factories.segment(0, 0, 10, 10)))
     assert_equal(false, Factories.segment(-5, -5, 0, 0).intersects?(Factories.segment(1, 1, 10, 10)))
+    assert_equal(false, Factories.segment(0, 0, 1, 1).intersects?(Factories.segment(1, 1, 2, 2)))
   end
 end
