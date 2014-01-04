@@ -27,8 +27,8 @@ class PolygonTest < GeometryParser::Test
     assert_equal(true, @polygon.convex?)
   end
 
-  def test_point_inside?
-    assert_equal(true, @polygon.point_inside?(Factories.point(1, 0.5)))
-    assert_equal(false, @polygon.point_inside?(Factories.point(1, 2)))
+  def test_has_point?
+    assert_equal(true, @polygon.has_point?(Factories.point(1, 0.5)))
+    assert_equal(false, @polygon.has_point?(Factories.point(1, 2)))
   end
 end

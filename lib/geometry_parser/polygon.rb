@@ -5,7 +5,7 @@ module GeometryParser
   end
 
   class Polygon
-    attr_reader :segments
+    attr_reader :segments, :points
 
     def initialize(data)
       @name = data['id']
@@ -29,7 +29,7 @@ module GeometryParser
       ConvexHull.convert(@points).size == @points.size
     end
 
-    def point_inside?(test_point)
+    def has_point?(test_point)
       found = false
       prev_i = @points.size - 1
 
