@@ -1,4 +1,4 @@
 Geometry Parser
 ===============
 
-Processes a list of points that form shapes. If the shape is a simple polygon then it determines if each of the shapes is seperate from, interesect, or is contained in each of the other shapes.
+Processes a list of points that form shapes and outputs the relationships between all the shapes that are simple convex polygons. A shape can be either separate from, intersecting, inside, or containing another shape. 
